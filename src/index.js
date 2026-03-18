@@ -7,6 +7,7 @@ app.use(cors({
     origin: [
         'http://localhost:3000', 
         "https://final-hackathon-xi-sandy.vercel.app",
+        'https://final-hackathon.vercel.app'
     ],
     credentials: true
 }));
