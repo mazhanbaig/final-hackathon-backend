@@ -4,11 +4,8 @@ const authRoutes=require("./routes/auth.route")
 const app = express()
 
 app.use(cors({
-    origin: [
-        'http://localhost:3000', 
-        "https://final-hackathon-xi-sandy.vercel.app",
-        'https://final-hackathon.vercel.app'
-    ],
+    origin: "*",   
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true
 }));
 
