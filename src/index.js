@@ -16,4 +16,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use("/api/auth", authRoutes)
 
+connectDB().then(() => console.log("MongoDB connected")).catch(err => console.log(err));
+
 module.exports = app
