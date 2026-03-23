@@ -9,7 +9,7 @@ const ResponseObj = require("../utils/ResponseObj")
 router.post("/register", async (req, res) => {
     try {
         const { name, email, password } = req.body
-
+        console.log("BODY:", req.body)
         const userExists = await User.findOne({ email })
 
         if (userExists) {
