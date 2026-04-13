@@ -6,9 +6,7 @@ const connectDB=require("./config/db")
 const app = express()
 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? 'https://final-hackathon-xi-sandy.vercel.app'
-        : 'http://localhost:3000',    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "*",
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
