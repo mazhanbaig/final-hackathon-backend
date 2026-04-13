@@ -8,7 +8,8 @@ const app = express()
 app.use(cors({
     origin: ["https://final-hackathon-xi-sandy.vercel.app","http://localhost:3000/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.use(express.json())
