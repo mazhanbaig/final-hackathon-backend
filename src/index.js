@@ -7,6 +7,7 @@ const app = express()
 
 app.use(cors({
     origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
@@ -15,5 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use("/api/auth", authRoutes)
+
+connectDB().then((res) => console.log("db connected"))
 
 module.exports = app
