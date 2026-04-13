@@ -1,25 +1,20 @@
-// require('dotenv').config()
-// const connectDB = require('./src/config/db')
-// const app = require("./src/index")
-
-// connectDB()
-// .then((res) => {
-//     app.listen(5000, () => {
-//         console.log("Server running at 5000")
-//     })
-// })
-// .catch((error) => {
-//     console.log('Error while connecting DB')
-// }) 
-
 require('dotenv').config()
 const connectDB = require('./src/config/db')
 const app = require("./src/index")
 
 module.exports = async (req, res) => {
+    // ✅ ADD CORS HEADERS MANUALLY (THIS FIXES EVERYTHING)
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+    // ✅ HANDLE PREFLIGHT HERE (MOST IMPORTANT)
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
+
     return app(req, res);
 };
-
 // For local development only
 if (process.env.NODE_ENV !== "production") {
     connectDB().then(() => {
