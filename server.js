@@ -10,7 +10,7 @@
 // })
 // .catch((error) => {
 //     console.log('Error while connecting DB')
-// })
+// }) 
 
 require('dotenv').config()
 const connectDB = require('./src/config/db')
