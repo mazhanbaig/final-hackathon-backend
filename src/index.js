@@ -17,6 +17,8 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use("/api/auth", authRoutes)
 
-connectDB().then((res) => console.log("db connected"))
-
+connectDB()
+    .then(() => console.log("DB connected"))
+    .catch(err => console.log(err));
+    
 module.exports = app
