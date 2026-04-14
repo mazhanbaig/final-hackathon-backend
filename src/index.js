@@ -5,12 +5,27 @@ const connectDB = require("./config/db")
 
 const app = express()
 
+const allowedOrigins = [
+    "https://final-hackathon-xi-sandy.vercel.app/",
+    "http://localhost:3000/"
+];
+
 app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: function (origin, callback) {
+        // allow requests with no origin (like Postman)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
-}))
+}));
+app.options("*", cors());
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
