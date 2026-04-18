@@ -177,4 +177,54 @@ router.get("/my/helping", async (req, res) => {
     }
 });
 
+
+
+
+// ACCEPT a helper
+router.put("/:id/accept-helper", async (req, res) => {
+    try {
+        const { helperId } = req.body;
+        const request = await Request.findById(req.params.id);
+
+        if (!request) return res.status(404).json(ResponseObj(false, "Not found", null, null));
+        if (request.createdBy.toString() !== req.user._id.toString()) {
+            return res.status(403).json(ResponseObj(false, "Only creator can accept helpers", null, null));
+        }
+
+        // Update helper status
+        const helperIndex = request.helpers.findIndex(h => h.toString() === helperId);
+        if (helperIndex !== -1) {
+            // You can add a status field to helpers array
+            request.acceptedHelper = helperId;
+            request.status = "in-progress";
+            await request.save();
+        }
+
+        res.json(ResponseObj(true, "Helper accepted", request, null));
+    } catch (error) {
+        res.status(500).json(ResponseObj(false, "Error", null, error.message));
+    }
+});
+
+// DECLINE a helper
+router.put("/:id/decline-helper", async (req, res) => {
+    try {
+        const { helperId } = req.body;
+        const request = await Request.findById(req.params.id);
+
+        if (!request) return res.status(404).json(ResponseObj(false, "Not found", null, null));
+        if (request.createdBy.toString() !== req.user._id.toString()) {
+            return res.status(403).json(ResponseObj(false, "Only creator can decline helpers", null, null));
+        }
+
+        // Remove helper from list
+        request.helpers = request.helpers.filter(h => h.toString() !== helperId);
+        await request.save();
+
+        res.json(ResponseObj(true, "Helper declined", request, null));
+    } catch (error) {
+        res.status(500).json(ResponseObj(false, "Error", null, error.message));
+    }
+});
+
 module.exports = router;
