@@ -227,4 +227,53 @@ router.put("/:id/decline-helper", async (req, res) => {
     }
 });
 
+
+
+// DELETE a request
+router.delete("/:id", async (req, res) => {
+    try {
+        const request = await Request.findById(req.params.id);
+
+        if (!request) {
+            return res.status(404).json(ResponseObj(false, "Request not found", null, null));
+        }
+
+        if (request.createdBy.toString() !== req.user._id.toString()) {
+            return res.status(403).json(ResponseObj(false, "Only creator can delete", null, null));
+        }
+
+        await request.deleteOne();
+        res.json(ResponseObj(true, "Request deleted", null, null));
+    } catch (error) {
+        res.status(500).json(ResponseObj(false, "Error", null, error.message));
+    }
+});
+
+// UPDATE a request
+router.put("/:id", async (req, res) => {
+    try {
+        const request = await Request.findById(req.params.id);
+
+        if (!request) {
+            return res.status(404).json(ResponseObj(false, "Request not found", null, null));
+        }
+
+        if (request.createdBy.toString() !== req.user._id.toString()) {
+            return res.status(403).json(ResponseObj(false, "Only creator can update", null, null));
+        }
+
+        const { title, description, category, urgency, tags } = req.body;
+
+        const updated = await Request.findByIdAndUpdate(
+            req.params.id,
+            { title, description, category, urgency, tags },
+            { new: true }
+        );
+
+        res.json(ResponseObj(true, "Request updated", updated, null));
+    } catch (error) {
+        res.status(500).json(ResponseObj(false, "Error", null, error.message));
+    }
+});
+
 module.exports = router;
