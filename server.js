@@ -61,3 +61,12 @@ connectDB()
     .catch((err) => {
         console.log("DB connection failed:", err);
     });
+
+
+
+
+
+
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTMyYzBjYTk1ZjJiNWQ1MDIxZTY5MyIsImlhdCI6MTc3NjQ5NTYyOSwiZXhwIjoxNzc3MTAwNDI5fQ._TkH4InQnf7oa4uVp1lakm2Ue16gSRlAP54CLYqjNZI

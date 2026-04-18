@@ -4,9 +4,10 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 const ResponseObj = require("../utils/ResponseObj")
+const checkAuth = require("../middlewares/authmiddleware")
 
 // REGISTER
-router.post("/register", async (req, res) => {
+router.post("/register",async (req, res) => {
     try {
         const { name, email, password } = req.body
         console.log("BODY:", req.body)
