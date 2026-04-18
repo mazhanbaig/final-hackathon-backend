@@ -5,12 +5,12 @@
 
 // // const app = express()
 
-// // app.use(cors({
-// //     origin: ["http://localhost:3000", "https://final-hackathon-xi-sandy.vercel.app","https://final-hackathon-xi-sandy.vercel.app"],
-// //     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-// //     credentials: true,
-// //     allowedHeaders: ["Content-Type", "Authorization"]
-// // }));
+// app.use(cors({
+//     origin: ["http://localhost:3000", "https://final-hackathon-xi-sandy.vercel.app","https://final-hackathon-xi-sandy.vercel.app"],
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     credentials: true,
+//     allowedHeaders: ["Content-Type", "Authorization"]
+// }));
 
 // // app.use(express.json())
 // // app.use(express.urlencoded({ extended: true }))
@@ -71,7 +71,7 @@ const notificationRoutes = require("./routes/notification.route");
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://final-hackathon-xi-sandy.vercel.app", "https://final-hackathon-backend.up.railway.app"],
+    origin: ["http://localhost:3000", "https://final-hackathon-xi-sandy.vercel.app", "https://final-hackathon-xi-sandy.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
