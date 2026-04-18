@@ -46,7 +46,6 @@ require("./src/models/Request");
 require("./src/models/Message");
 require("./src/models/Notification");
 
-console.log("✅ Registered models:", mongoose.modelNames());
 
 // Now import the app
 const app = require("./src/index");
@@ -57,8 +56,7 @@ const PORT = process.env.PORT || 5000;
 connectDB()
     .then(() => {
         console.log("✅ MongoDB connected successfully");
-        console.log("📦 Available models:", mongoose.modelNames());
-
+       
         app.listen(PORT, "0.0.0.0", () => {
             console.log(`🚀 Server running on port ${PORT}`);
         });
